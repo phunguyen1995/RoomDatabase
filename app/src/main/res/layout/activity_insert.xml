@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tvEDitHocSinh"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Edit Student"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="@color/teal_200"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="9dp" />
+
+    <EditText
+        android:id="@+id/etEditName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvEDitHocSinh"
+        android:layout_marginTop="53dp"
+        android:textStyle="bold"
+        android:textColor="@color/design_default_color_error"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:hint="Ten Hoc Sinh"
+        android:textSize="25dp" />
+    <AutoCompleteTextView
+        android:id="@+id/etEditlop"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Lop"
+        android:layout_below="@+id/etEditName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etEditAge"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Tuoi"
+        android:layout_below="@+id/etEditlop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etEditTeacher"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Giao Vien"
+        android:layout_below="@+id/etEditAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etEditAdress"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Dia Chi"
+        android:layout_below="@+id/etEditTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+    <Button
+        android:id="@+id/btnetEditBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:text="Back">
+
+    </Button>
+    <Button
+        android:id="@+id/btnetEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:text="Edit">
+
+    </Button>
+
+
+</RelativeLayout>
