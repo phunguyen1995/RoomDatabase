@@ -74,10 +74,10 @@ public class AddActivity extends AppCompatActivity {
                 formatted = current.format(formatter);
                 editData(a);
                 dataBase.userDao().insertAll(editData(a));
-                Intent intent = getIntent();
-                intent.putExtra("positiondata", positiondata);
-                intent.putExtra("dataadd",2);
-                setResult(Activity.RESULT_OK,intent);
+             //   Intent intent = getIntent();
+               // intent.putExtra("positiondata", positiondata);
+               // intent.putExtra("dataadd",2);
+              //  setResult(Activity.RESULT_OK,intent);
                 finish();
             }
         });

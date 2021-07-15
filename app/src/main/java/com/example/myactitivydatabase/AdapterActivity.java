@@ -1,10 +1,17 @@
 package com.example.myactitivydatabase;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.AsyncDifferConfig;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myactitivydatabase.databinding.ActivityItemBinding;
@@ -13,16 +20,40 @@ import com.example.myactitivydatabase.databinding.ItemLoadMoreBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterActivity extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterActivity extends PagedListAdapter {
+       // RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int View_TYPE_ITEM =0;
     private final int VIEW_TYPE_LOADING = 1;
     private List<User> data = new ArrayList<User>();
     private EventSV listener;
-    public AdapterActivity(List<User> data) {
-    this.data=data;
-    }
+
+     public AdapterActivity(List<User> data) {
+         super(DIFF_CALLBACK);
+         this.data=data;
+   }
+    private static DiffUtil.ItemCallback<User> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<User>() {
+                // Concert details may have changed if reloaded from the database,
+                // but ID is fixed.
+                @Override
+                public boolean areItemsTheSame(User oldUser, User newUser) {
+                    return oldUser.id == newUser.id;
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                @Override
+                public boolean areContentsTheSame(User oldUser,
+                                                  User newUser) {
+                    return oldUser.equals(newUser);
+                }
+            };
     public void setListener(EventSV listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void submitList(PagedList pagedList) {
+        super.submitList(pagedList);
     }
 
     @Override
@@ -55,6 +86,7 @@ public class AdapterActivity extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
     public void addAll(List<User> dataForList) {
         data.addAll(dataForList);
+//        notify();
         notifyDataSetChanged();
     }
     public class ViewHolder11 extends RecyclerView.ViewHolder {
@@ -97,7 +129,7 @@ public class AdapterActivity extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
     public void AddStudent(User user) {
      data.add(user);
-        notifyItemInserted(data.size());
+     notifyItemInserted(data.size());
     }
     public void deleteStudent(int position){
         data.remove(position);

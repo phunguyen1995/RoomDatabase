@@ -17,6 +17,8 @@ import io.reactivex.Flowable;
 public interface UserDao {
     @Query("SELECT * FROM User")
     LiveData<List<User>> getAll();
+    @Query("SELECT * FROM User")
+    List<User> getAll1();
     @Query(" SELECT * FROM User Where idClass = :IdClass ")
     List<User> selectUserByIdClass (int IdClass);
     @Query("SELECT * FROM user WHERE id IN (:userIds)")

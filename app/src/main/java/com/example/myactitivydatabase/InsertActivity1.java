@@ -64,7 +64,7 @@ public class InsertActivity1 extends AppCompatActivity {
                 dataBase.userDao().update(a);
                 Intent intent_insert = getIntent();
               //int c = (int) getIntent().getSerializableExtra("position");
-               intent_insert.putExtra("datainsert", 1);
+             //  intent_insert.putExtra("datainsert", 1);
              //  intent.putExtra("position1",intent.getSerializableExtra("position"));
                // intent_insert.pu
                 setResult(Activity.RESULT_OK, intent_insert);
@@ -74,11 +74,11 @@ public class InsertActivity1 extends AppCompatActivity {
 
     }
     public User editData(User a){
-        a.name=binding1.etEditName.getText().toString();
-        a.age=binding1.etEditAge.getText().toString();
-        a.adress=binding1.etEditAdress.getText().toString();
-        a.lop=binding1.etEditlop.getText().toString();
-        a.giaovien=binding1.etEditTeacher.getText().toString();
+        a.name=binding1.etEditName.getText().toString().trim();
+        a.age=binding1.etEditAge.getText().toString().trim();
+        a.adress=binding1.etEditAdress.getText().toString().trim();
+        a.lop=binding1.etEditlop.getText().toString().trim();
+        a.giaovien=binding1.etEditTeacher.getText().toString().trim();
         a.ngaythem=formatted;
         return a;
     }
