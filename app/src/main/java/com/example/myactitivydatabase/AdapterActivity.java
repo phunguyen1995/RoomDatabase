@@ -20,16 +20,14 @@ import com.example.myactitivydatabase.databinding.ItemLoadMoreBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterActivity extends PagedListAdapter {
+public class AdapterActivity extends PagedListAdapter<User,  RecyclerView.ViewHolder> {
        // RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int View_TYPE_ITEM =0;
     private final int VIEW_TYPE_LOADING = 1;
-    private List<User> data = new ArrayList<User>();
     private EventSV listener;
-
+   // private CompositeDisposable disposable = new CompositeDisposable();
      public AdapterActivity(List<User> data) {
          super(DIFF_CALLBACK);
-         this.data=data;
    }
     private static DiffUtil.ItemCallback<User> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<User>() {
@@ -42,18 +40,12 @@ public class AdapterActivity extends PagedListAdapter {
 
                 @SuppressLint("DiffUtilEquals")
                 @Override
-                public boolean areContentsTheSame(User oldUser,
-                                                  User newUser) {
+                public boolean areContentsTheSame(User oldUser, User newUser) {
                     return oldUser.equals(newUser);
                 }
             };
     public void setListener(EventSV listener) {
         this.listener = listener;
-    }
-
-    @Override
-    public void submitList(PagedList pagedList) {
-        super.submitList(pagedList);
     }
 
     @Override
@@ -71,21 +63,17 @@ public class AdapterActivity extends PagedListAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder11) {
-            ((ViewHolder11) holder).setData(data.get(position), position);
+            ((ViewHolder11) holder).setData(getItem(position), position);
         } else if (holder instanceof LoadingViewHolder) {
             Log.e("", "");
         }
     }
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
-    @Override
     public int getItemViewType(int position) {
-        return data.get(position)== null? VIEW_TYPE_LOADING:View_TYPE_ITEM;
+        return getItem(position)== null? VIEW_TYPE_LOADING:View_TYPE_ITEM;
     }
     public void addAll(List<User> dataForList) {
-        data.addAll(dataForList);
+//        data.addAll(dataForList);
 //        notify();
         notifyDataSetChanged();
     }
@@ -128,19 +116,19 @@ public class AdapterActivity extends PagedListAdapter {
         }
     }
     public void AddStudent(User user) {
-     data.add(user);
-     notifyItemInserted(data.size());
+//     getCurrentList().add(user);
+//     notifyItemInserted(data.size());
     }
     public void deleteStudent(int position){
-        data.remove(position);
+//        data.remove(position);
         notifyItemRemoved(position);
     }
     public void deleteAll(){
-        data.clear();
+//        data.clear();
         notifyDataSetChanged();
     }
     public void EditStudent(User data1, int position){
-        User a = data.get(position);
+        User a = getItem(position);
         a.name =data1.name;
         a.adress=data1.adress;
         a.age=data1.age;

@@ -47,15 +47,16 @@ public class SinhVienActivity extends AppCompatActivity  implements EventSV{
         LinearLayoutManager linear = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
         binding.recyclerview.setLayoutManager(linear);
   //      viewModel =new ViewModelProvider(this,new ViewModelProvider.NewInstanceFactory).get(SinhVienViewModel.class);
-       // if(dataBase.userDao().getAll().size()==0){
-//        dataBase.userDao().insertAll (createDataForList());
-      ///  viewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(SinhVienViewModel.class);
-        SinhVienViewModel viewModel =
-                new ViewModelProvider(this).get(SinhVienViewModel.class);
+        if(dataBase.userDao().getAll1().size()==0){
+         dataBase.userDao().insertAll (createDataForList());}
+       // viewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(SinhVienViewModel.class);
+        SinhVienViewModel viewModel = new ViewModelProvider(this).get(SinhVienViewModel.class);
         //   viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(Application)).get(SinhVienViewModel.class)
     //  }
-        data =  dataBase.userDao().getAll1();
+      //  data = dataBase.userDao().loadUser(0);
+     //   data =  dataBase.userDao().getAll1();
         adapterActivity = new AdapterActivity(data);
+        viewModel.usertList.observe(this, adapterActivity::submitList);
        // adapterActivity.setListener(this);
         binding.recyclerview.setAdapter(adapterActivity);
         adapterActivity.setListener(this);
@@ -123,8 +124,8 @@ public class SinhVienActivity extends AppCompatActivity  implements EventSV{
                 if(!isLoading ){
                     if(linearLayoutManager!=null
                             && linearLayoutManager.findLastCompletelyVisibleItemPosition()== data.size()-1 &&
-                            adapterActivity.getItemCount()>50 && isLoadmore  ){
-                        loadMore();
+                            adapterActivity.getItemCount()>5 && isLoadmore  ){
+                       loadMore();
                         isLoading=true;
                     }
                 }
@@ -145,7 +146,7 @@ public class SinhVienActivity extends AppCompatActivity  implements EventSV{
                     int scrollPosition=data.size();
                     adapterActivity.notifyItemRemoved(scrollPosition);
                     adapterActivity.addAll(data12);
-                    if(data12.size()==50) {
+                    if(data12.size()==5) {
                         offset++;
                         isLoadmore=true;
                     } else isLoadmore=false;
@@ -162,14 +163,14 @@ public class SinhVienActivity extends AppCompatActivity  implements EventSV{
 
     }
 
- //   private User[] createDataForList(){
-//   /    // for(int i = 0; i <200; i++) {
-           // data.add(new User("nguyen van phu", "24", "nam o", "1A", "nguyen van A", "20/01/2021"));
-       // }
-    //    User[] arr = new User[data.size()];
-  //      data.toArray(arr);
-   //     return (arr);
- //   }
+   private User[] createDataForList(){
+   for(int i = 0; i <200; i++) {
+       data.add(new User(1,"nguyen van phu", "24", "nam o", "1A", "nguyen van A", "20/01/2021"));
+        }
+      User[] arr = new User[data.size()];
+      data.toArray(arr);
+      return (arr);
+   }
     @Override
     public void EditStudent(User data2, int position) {
         Intent intent = new Intent(SinhVienActivity.this, InsertActivity1.class);
